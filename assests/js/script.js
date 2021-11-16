@@ -2,6 +2,7 @@
 //Variables
 //-----------------------------------------
 var currentDayEl = document.querySelector("#currentDay");
+var rowContainerEl = document.querySelector("#container");
 
 //-----------------------------------------
 //Event Listeners
@@ -48,6 +49,13 @@ var buildCalendar = function() {
         }
 
         //build divs
+        var rowEl = document.createElement("div");
+        rowEl.classList = "row";
+
+        rowContainerEl.appendChild(rowEl);
+
+
+
     }
 }
 
