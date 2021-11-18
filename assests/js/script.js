@@ -39,25 +39,41 @@ var buildCalendar = function() {
             timeSlot = newTime + "PM"
         }
 
+        
+
+        //build rows
+        var rowEl = document.createElement("div");
+        var timeEl = document.createElement("p");
+        var descriptionEl = document.createElement("p");
+        var saveButtonEl = document.createElement("button");
+        rowEl.className = "row";
+        timeEl.className = "hour col-2 row";
+        
+        saveButtonEl.className = "saveBtn col-1 row";
+
+        rowContainerEl.append(rowEl);
+
+        rowEl.append(timeEl);
+        rowEl.append(descriptionEl);
+        rowEl.append(saveButtonEl);
+
+        timeEl.textContent = timeSlot;
+
         //color code 
         if (i=== currentHour) {
             //present
+            descriptionEl.className = "description col-9 present row";
         } else if (i < currentHour) {
             //past
+            descriptionEl.className = "description col-9 past row";
         } else {
             //future
+            descriptionEl.className = "description col-9 future row";
         }
-
-        //build divs
-        var rowEl = document.createElement("div");
-        rowEl.classList = "row";
-
-        rowContainerEl.appendChild(rowEl);
-
 
 
     }
 }
 
 currentDay();
-buildCalendar;
+buildCalendar();
