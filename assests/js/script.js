@@ -24,7 +24,6 @@ var currentDay = function() {
 var buildCalendar = function() {
     //deterime current hour
     var currentHour = moment(moment()).format('HH');
-    console.log(currentHour);
 
     for (var i = 8; i<18; i++) {
 
@@ -38,8 +37,6 @@ var buildCalendar = function() {
             var newTime = i - 12;
             timeSlot = newTime + "PM"
         }
-
-        
 
         //build rows
         var rowEl = document.createElement("div");
@@ -60,15 +57,15 @@ var buildCalendar = function() {
         timeEl.textContent = timeSlot;
 
         //color code 
-        if (i=== currentHour) {
-            //present
-            descriptionEl.className = "description col-9 present row";
+        if (i > currentHour) {
+            //future
+            descriptionEl.className = "description col-9 future row";
         } else if (i < currentHour) {
             //past
             descriptionEl.className = "description col-9 past row";
         } else {
-            //future
-            descriptionEl.className = "description col-9 future row";
+            //present
+            descriptionEl.className = "description col-9 present row";
         }
 
 
