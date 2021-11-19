@@ -7,8 +7,12 @@ var rowContainerEl = document.querySelector("#container");
 //-----------------------------------------
 //Event Listeners
 //-----------------------------------------
-$(".saveBtn").on("click", "btn", function() {
+$(document).on("click", ".saveBtn", function() {
     console.log("button clicked")
+});
+
+$(document).on("click", ".description", function() {
+    console.log("description clicked")
 });
 
 //-----------------------------------------
@@ -78,13 +82,7 @@ var buildCalendar = function() {
             descriptionEl.className = "description col-9 present row";
         }
     }
-
-    
 }
 
 currentDay();
 buildCalendar();
-
-$(".description col-9 future row").on("click", "p", function() {
-    console.log("p selected");
-});

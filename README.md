@@ -19,7 +19,7 @@ Daily calendar manager is a tool to help manage your day.  The calendar will aut
 
 ## Contribution
 
-Created with ❤️ by Shawna Boucher
+Created with ❤️  by Shawna Boucher
 
 ## License
 
