@@ -7,7 +7,9 @@ var rowContainerEl = document.querySelector("#container");
 //-----------------------------------------
 //Event Listeners
 //-----------------------------------------
-
+$(".saveBtn").on("click", "btn", function() {
+    console.log("button clicked")
+});
 
 //-----------------------------------------
 //Functions
@@ -43,6 +45,8 @@ var buildCalendar = function() {
         var timeEl = document.createElement("p");
         var descriptionEl = document.createElement("p");
         var saveButtonEl = document.createElement("button");
+        saveButtonEl.id = "saveBtn"+i;
+
         rowEl.className = "row";
         timeEl.className = "hour col-2 row";
         
@@ -56,7 +60,13 @@ var buildCalendar = function() {
 
         timeEl.textContent = timeSlot;
 
-        //color code 
+        //add icon to Save Button
+        var btnSpan = document.createElement("span");
+        btnSpan.className = "oi oi-lock-locked";
+        btnSpan.id = "icon"
+        document.getElementById("saveBtn"+i).appendChild(btnSpan);
+
+        //color code time slots
         if (i > currentHour) {
             //future
             descriptionEl.className = "description col-9 future row";
@@ -67,10 +77,14 @@ var buildCalendar = function() {
             //present
             descriptionEl.className = "description col-9 present row";
         }
-
-
     }
+
+    
 }
 
 currentDay();
 buildCalendar();
+
+$(".description col-9 future row").on("click", "p", function() {
+    console.log("p selected");
+});
