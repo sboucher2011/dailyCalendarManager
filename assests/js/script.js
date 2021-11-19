@@ -8,11 +8,36 @@ var rowContainerEl = document.querySelector("#container");
 //Event Listeners
 //-----------------------------------------
 $(document).on("click", ".saveBtn", function() {
-    console.log("button clicked")
+    console.log("button clicked");
+    var text = $(".description").text();
+    console.log(text);
 });
 
-$(document).on("click", ".description", function() {
-    console.log("description clicked")
+$(document).on("click", ".future", function() {
+    var text = $(this)
+    .text()
+    .trim();
+
+  var textInput = $("<textarea>")
+    .addClass(".description col-9 future row")
+    .val(text);
+  
+  $(this).replaceWith(textInput);
+
+  textInput.trigger("focus");
+});
+
+$(document).on("blur", "textarea", function() {
+    var text = $(this)
+    .val()
+    .trim();
+
+  // recreate p element
+  var taskP = $("<p>")
+  .addClass("description col-9 future row")
+  .text(text);
+
+  $(this).replaceWith(taskP);
 });
 
 //-----------------------------------------
@@ -73,7 +98,7 @@ var buildCalendar = function() {
         //color code time slots
         if (i > currentHour) {
             //future
-            descriptionEl.className = "description col-9 future row";
+            descriptionEl.className = "future row description col-9";
         } else if (i < currentHour) {
             //past
             descriptionEl.className = "description col-9 past row";
