@@ -3,12 +3,15 @@
 //-----------------------------------------
 var currentDayEl = document.querySelector("#currentDay");
 var rowContainerEl = document.querySelector("#container");
+var descriptionRowEl = document.querySelector(".future");
 
 //-----------------------------------------
 //Event Listeners
 //-----------------------------------------
 $(document).on("click", ".saveBtn", function() {
     console.log("button clicked");
+    var string = descriptionRowEl.getAttribute("id");
+    console.log(string)
     var text = $(".description").text();
     console.log(text);
 });
@@ -75,6 +78,7 @@ var buildCalendar = function() {
         var descriptionEl = document.createElement("p");
         var saveButtonEl = document.createElement("button");
         saveButtonEl.id = "saveBtn"+i;
+        descriptionEl.id = "description"+i;
 
         rowEl.className = "row";
         timeEl.className = "hour col-2 row";
