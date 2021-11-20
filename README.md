@@ -5,7 +5,7 @@ Daily calendar manager is a tool to help manage your day.  The calendar will aut
 
 ## Website Preview
 
-![alt text](https://github.com/sboucher2011/dailyCalendarManager/blob/main/assests/images.png)
+![alt text](https://github.com/sboucher2011/dailyCalendarManager/blob/main/assests/images/readme.png)
 
 ## Built With
 * HTML
@@ -16,6 +16,7 @@ Daily calendar manager is a tool to help manage your day.  The calendar will aut
 
 ## Website
 
+https://sboucher2011.github.io/dailyCalendarManager/
 
 ## Contribution
 

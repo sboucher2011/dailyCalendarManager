@@ -3,6 +3,7 @@
 //-----------------------------------------
 var currentDayEl = document.querySelector("#currentDay");
 var rowContainerEl = document.querySelector("#container");
+const taskDescriptions = JSON.parse(localStorage.getItem("taskDescriptions")) || [];
 
 //-----------------------------------------
 //Event Listeners
@@ -12,7 +13,7 @@ $(document).on("click", ".saveBtn", function(event) {
     var btnName = $(this).attr('id').split('-')[1];
 
     var text = $("#description-" + btnName).text();
-    console.log(text);
+
     saveRow(text, btnName);
 });
 
@@ -116,16 +117,38 @@ var buildCalendar = function() {
             //present
             descriptionEl.className = "description col-9 present row";
         }
+
+        //populate with data if exists
+        if (taskDescriptions.length > 0) {
+            for (var j = 0; j < taskDescriptions.length; j++) {
+                if (i === parseInt(taskDescriptions[j].rowNumber)) {
+                    if (currentDayEl.textContent === taskDescriptions[j].day) {
+                        descriptionEl.textContent = taskDescriptions[j].task;
+                    } else {
+                        //if data is not today delete it
+                        localStorage.removeItem(taskDescriptions[j])
+                    }
+                }
+            }
+    
+        }
+
     }
 }
 
 var saveRow = function(text, row) {
     console.log(text);
     console.log(row);
-}
 
-var populateRows = function() {
+    const taskDescription = {
+        task: text,
+        rowNumber: row,
+        day: currentDayEl.textContent,
+    }
 
+    taskDescriptions.push(taskDescription);
+
+    localStorage.setItem("taskDescriptions", JSON.stringify(taskDescriptions));
 }
 
 currentDay();
