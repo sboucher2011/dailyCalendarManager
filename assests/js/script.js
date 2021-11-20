@@ -3,44 +3,50 @@
 //-----------------------------------------
 var currentDayEl = document.querySelector("#currentDay");
 var rowContainerEl = document.querySelector("#container");
-var descriptionRowEl = document.querySelector(".future");
 
 //-----------------------------------------
 //Event Listeners
 //-----------------------------------------
-$(document).on("click", ".saveBtn", function() {
-    console.log("button clicked");
-    var string = descriptionRowEl.getAttribute("id");
-    console.log(string)
-    var text = $(".description").text();
+$(document).on("click", ".saveBtn", function(event) {
+
+    var btnName = $(this).attr('id').split('-')[1];
+
+    var text = $("#description-" + btnName).text();
     console.log(text);
+    saveRow(text, btnName);
 });
 
 $(document).on("click", ".future", function() {
     var text = $(this)
-    .text()
-    .trim();
+        .text()
+        .trim();
+    
+    var rowName = $(this).attr('id');
 
-  var textInput = $("<textarea>")
-    .addClass(".description col-9 future row")
-    .val(text);
+    var textInput = $("<textarea>")
+        .attr('id', rowName)
+        .addClass("description col-9 future row")
+        .val(text);
   
-  $(this).replaceWith(textInput);
+    $(this).replaceWith(textInput);
 
-  textInput.trigger("focus");
+    textInput.trigger("focus");
 });
 
 $(document).on("blur", "textarea", function() {
     var text = $(this)
-    .val()
-    .trim();
+        .val()
+        .trim();
+    
+    var rowName = $(this).attr('id');
 
-  // recreate p element
-  var taskP = $("<p>")
-  .addClass("description col-9 future row")
-  .text(text);
+    // recreate p element
+    var descriptionP = $("<p>")
+        .attr('id', rowName)
+        .addClass("description col-9 future row")
+        .text(text);
 
-  $(this).replaceWith(taskP);
+    $(this).replaceWith(descriptionP);
 });
 
 //-----------------------------------------
@@ -77,8 +83,8 @@ var buildCalendar = function() {
         var timeEl = document.createElement("p");
         var descriptionEl = document.createElement("p");
         var saveButtonEl = document.createElement("button");
-        saveButtonEl.id = "saveBtn"+i;
-        descriptionEl.id = "description"+i;
+        saveButtonEl.id = "saveBtn-"+i;
+        descriptionEl.id = "description-"+i;
 
         rowEl.className = "row";
         timeEl.className = "hour col-2 row";
@@ -97,7 +103,7 @@ var buildCalendar = function() {
         var btnSpan = document.createElement("span");
         btnSpan.className = "oi oi-lock-locked";
         btnSpan.id = "icon"
-        document.getElementById("saveBtn"+i).appendChild(btnSpan);
+        document.getElementById("saveBtn-"+i).appendChild(btnSpan);
 
         //color code time slots
         if (i > currentHour) {
@@ -111,6 +117,15 @@ var buildCalendar = function() {
             descriptionEl.className = "description col-9 present row";
         }
     }
+}
+
+var saveRow = function(text, row) {
+    console.log(text);
+    console.log(row);
+}
+
+var populateRows = function() {
+
 }
 
 currentDay();
