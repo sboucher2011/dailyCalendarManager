@@ -14,6 +14,8 @@ $(document).on("click", ".saveBtn", function(event) {
 
     var text = $("#description-" + btnName).text();
 
+    console.log(btnName)
+
     saveRow(text, btnName);
 });
 
@@ -22,11 +24,45 @@ $(document).on("click", ".future", function() {
         .text()
         .trim();
     
-    var rowName = $(this).attr('id');
+    var rowName = $(this).attr('id')+"-future";
 
     var textInput = $("<textarea>")
         .attr('id', rowName)
         .addClass("description col-9 future row")
+        .val(text);
+  
+    $(this).replaceWith(textInput);
+
+    textInput.trigger("focus");
+});
+
+$(document).on("click", ".past", function() {
+    var text = $(this)
+        .text()
+        .trim();
+    
+    var rowName = $(this).attr('id')+"-past";
+
+    var textInput = $("<textarea>")
+        .attr('id', rowName)
+        .addClass("description col-9 past row")
+        .val(text);
+  
+    $(this).replaceWith(textInput);
+
+    textInput.trigger("focus");
+});
+
+$(document).on("click", ".present", function() {
+    var text = $(this)
+        .text()
+        .trim();
+    
+    var rowName = $(this).attr('id')+"-present";
+
+    var textInput = $("<textarea>")
+        .attr('id', rowName)
+        .addClass("description col-9 present row")
         .val(text);
   
     $(this).replaceWith(textInput);
@@ -39,12 +75,26 @@ $(document).on("blur", "textarea", function() {
         .val()
         .trim();
     
-    var rowName = $(this).attr('id');
+
+    var rowName = "description-" + $(this).attr('id').split('-')[1];   
+    var timeTense = $(this).attr('id').split('-')[2];
+
+    console.log(rowName);
+
+    var classInfo = "";
+
+    if (timeTense === "future") {
+        classInfo = "description col-9 future row"
+    } else if (timeTense === "past") {
+        classInfo = "description col-9 past row"
+    } else {
+        classInfo = "description col-9 present row"
+    }
 
     // recreate p element
     var descriptionP = $("<p>")
         .attr('id', rowName)
-        .addClass("description col-9 future row")
+        .addClass(classInfo)
         .text(text);
 
     $(this).replaceWith(descriptionP);
@@ -124,21 +174,14 @@ var buildCalendar = function() {
                 if (i === parseInt(taskDescriptions[j].rowNumber)) {
                     if (currentDayEl.textContent === taskDescriptions[j].day) {
                         descriptionEl.textContent = taskDescriptions[j].task;
-                    } else {
-                        //if data is not today delete it
-                        localStorage.removeItem(taskDescriptions[j])
                     }
                 }
             }
-    
         }
-
     }
 }
 
 var saveRow = function(text, row) {
-    console.log(text);
-    console.log(row);
 
     const taskDescription = {
         task: text,
